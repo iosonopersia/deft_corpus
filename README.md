@@ -2,7 +2,13 @@
 
 ## Setup
 
-Download the original DEFT Corpus:
+Install the required dependencies:
+
+```bash
+pip install -r ./requirements.txt
+```
+
+Download the original DEFT Corpus inside the project folder:
 
 ```bash
 git clone https://github.com/adobe-research/deft_corpus
@@ -23,3 +29,7 @@ python ./augmentation.py
 ```
 
 Run the Jupyter Notebook (`./TL_SimonePersiani.ipynb`).
+
+## Acknowledgments
+
+The [original dataset](https://github.com/adobe-research/deft_corpus) is attributed to [AdobeResearch](https://github.com/adobe-research).
