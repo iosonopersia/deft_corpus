@@ -1,3 +1,6 @@
+.env
+.env_linux
+
 deft_corpus-master
 *.pt
 .idea
