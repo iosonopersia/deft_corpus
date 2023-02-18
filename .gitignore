@@ -1,6 +1,8 @@
 .env
 .env_linux
 
+checkpoints
+wandb
 deft_corpus-master
-*.pt
-.idea
+
+**/__pycache__
