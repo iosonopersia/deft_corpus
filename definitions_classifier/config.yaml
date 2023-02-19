@@ -1,0 +1,73 @@
+---
+
+checkpoint:
+    save_checkpoint: True
+    save_path: checkpoints/model.pth
+    load_checkpoint: False
+    load_path: checkpoints/model.pth
+
+dataset:
+    train_labels_file: dataset/augmented/train.tsv
+    val_labels_file: dataset/augmented/dev.tsv
+    test_labels_file: dataset/preprocessed/test.tsv
+    max_sentence_length: 60
+
+model:
+    cls_head_hidden_units: 64
+    backbone: roberta-base
+
+hyperparameters:
+    optimizer: AdamW # AdamW, SGD
+    epochs: 8
+    learning_rate: 1.0e-5
+    weight_decay: 0.01
+    momentum: 0.9
+    label_smoothing: 0.05
+    gradient_accumulation_steps: 1 # 1 to disable
+    gradient_clip:
+        enabled: True
+        max_grad_norm: 1.0
+        grad_norm_type: 2 # Euclidean norm
+    scheduler:
+        enabled: True
+        warmup_epochs: 1 # 0 to disable
+    early_stopping:
+        enabled: True
+        patience: 3
+        restore_best: True
+
+test:
+    checkpoint_path: checkpoints/model.pth
+    threshold: 0.54
+
+dataloader:
+    train:
+        shuffle: True
+        batch_size: 64
+        num_workers: 1
+        pin_memory: True
+        drop_last: True
+    val:
+        shuffle: False
+        batch_size: 64
+        num_workers: 1
+        pin_memory: True
+        drop_last: False
+    test:
+        shuffle: False
+        batch_size: 64
+        num_workers: 1
+        pin_memory: True
+        drop_last: False
+
+wandb:
+    enabled: True
+    log_freq: 1 # number of batches between two wandb logs
+    watch_model: False
+    watch_model_type: 'all' # 'gradients', 'parameters', 'all', None
+    project: definitions_classifier
+    entity: "iosonopersia" # user or team name
+    resume_run: False
+    resume_run_id: "" # wandb run id to resume
+
+...
