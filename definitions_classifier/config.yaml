@@ -38,7 +38,7 @@ hyperparameters:
 
 test:
     checkpoint_path: checkpoints/model.pth
-    threshold: 0.54
+    threshold: 0.25
 
 dataloader:
     train:
