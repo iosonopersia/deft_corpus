@@ -98,10 +98,18 @@ def plot_prec_rec_curve(true_labels: np.array, model_predictions: np.array) -> f
     f1_score = 2 * prec * rec / (prec + rec + 1e-8)
     ix = np.argmax(f1_score)
 
-    plt.figure(figsize=(5, 5))
+    # Locate the index for threshold = 0.25
+    ix_025 = np.argmin(np.abs(thresholds - 0.25))
 
-    plt.plot(rec, prec, marker='.', label='Model')
-    plt.scatter(rec[ix], prec[ix], marker='o', color='black', zorder=1000, label=f'Best threshold: {thresholds[ix]:.2f}')
+    # Locate the index for threshold = 0.5
+    ix_05 = np.argmin(np.abs(thresholds - 0.5))
+
+    plt.figure(figsize=(6, 6))
+
+    plt.plot(rec, prec, marker='', color='green', label='Model')
+    plt.scatter(rec[ix], prec[ix], marker='*', color='gold', edgecolor="black", s=200, zorder=2000, label=f'Best threshold = {thresholds[ix]:.2f}')
+    plt.scatter(rec[ix_025], prec[ix_025], marker='^', color='red', edgecolor="black", s=100, zorder=1000, label=f'Threshold = 0.25')
+    plt.scatter(rec[ix_05], prec[ix_05], marker='v', color='blue', edgecolor="black", s=100, zorder=1000, label=f'Threshold = 0.5')
 
     plt.xlim((0, 1))
     plt.ylim((0, 1))
